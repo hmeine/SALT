@@ -24,7 +24,7 @@ class DataConfig:
     dataset_infos: List[DatasetInfo]
     num_classes: int
     labels: List[Tuple[str, ...]]
-    leave_labels: List[Tuple[str, ...]]
+    leaf_labels: List[Tuple[str, ...]]
     adjacency_matrix: np.ndarray
     sink_mask: np.ndarray
 
@@ -83,7 +83,7 @@ def find_datasets(dataset_dir: Path) -> DataConfig:
         dataset_infos=result,
         num_classes=builder.num_classes,
         labels=builder.labels,
-        leave_labels=builder.leave_names,
+        leaf_labels=builder.leaf_names,
         adjacency_matrix=builder.adjacency_matrix,
         sink_mask=sink_mask,
     )

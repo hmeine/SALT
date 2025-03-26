@@ -9,10 +9,10 @@ class PruneToLeaveNodes(Transform):
     def __init__(self, adjacency_matrix: NdarrayOrTensor) -> None:
         super().__init__()
         child_count = torch.as_tensor(adjacency_matrix[1:, 1:]).sum(1)
-        self.leave_indices = torch.nonzero(child_count == 0, as_tuple=True)[0]
+        self.leaf_indices = torch.nonzero(child_count == 0, as_tuple=True)[0]
 
     def __call__(self, data: NdarrayOrTensor) -> NdarrayOrTensor:
-        tmp = torch.index_select(data, 0, self.leave_indices.to(data.device))
+        tmp = torch.index_select(data, 0, self.leaf_indices.to(data.device))
         return tmp
 
 
