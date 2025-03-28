@@ -83,12 +83,12 @@ class TrainingModel(torch.nn.Module):
                                 )
                             )
                             for ds_idx, (yhat_ds, yhat_pred_ds) in enumerate(
-                                zip(yhats.unbind(0), yhat_preds.unbind(0))
+                                zip(yhat.unbind(0), yhat_pred.unbind(0))
                             )
                         ],
                         dim=0,
                     ).sum(0)
-                    for yhats, yhat_preds, target, mask in zip(
+                    for yhat, yhat_pred, target, mask in zip(
                         yhats, yhat_preds, targets, masks
                     )
                 ]
