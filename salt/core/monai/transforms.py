@@ -5,7 +5,7 @@ from monai.config.type_definitions import KeysCollection, NdarrayOrTensor
 from monai.transforms import MapTransform, Transform
 
 
-class PruneToLeaveNodes(Transform):
+class PruneToLeafNodes(Transform):
     def __init__(self, adjacency_matrix: NdarrayOrTensor) -> None:
         super().__init__()
         child_count = torch.as_tensor(adjacency_matrix[1:, 1:]).sum(1)
@@ -16,7 +16,7 @@ class PruneToLeaveNodes(Transform):
         return tmp
 
 
-class PruneToLeaveNodesd(MapTransform):
+class PruneToLeafNodesd(MapTransform):
     def __init__(
         self,
         keys: KeysCollection,
@@ -25,7 +25,7 @@ class PruneToLeaveNodesd(MapTransform):
     ) -> None:
         super().__init__(keys, allow_missing_keys)
 
-        self.converter = PruneToLeaveNodes(adjacency_matrix)
+        self.converter = PruneToLeafNodes(adjacency_matrix)
 
     def __call__(
         self, data: Mapping[Hashable, NdarrayOrTensor]
