@@ -80,7 +80,7 @@ class HierarchyAwareDiceLoss(_Loss):
         computed_masks: Dict[int, torch.Tensor] = {}
         class_indices_np = class_indices.cpu().numpy().ravel()
         for class_idx in class_indices_np:
-            parent_idx = self.adjacency_matrix[:, class_idx + 1].argmax()
+            parent_idx: int = self.adjacency_matrix[:, class_idx + 1].argmax()  # type: ignore
 
             if parent_idx == 0:
                 sub_input = input[:, class_idx]

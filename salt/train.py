@@ -57,7 +57,7 @@ class TrainingModel(torch.nn.Module):
         images: torch.Tensor,
         targets: torch.Tensor,
         masks: torch.Tensor,
-    ) -> torch.Tensor:
+    ) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
         yhats = self.base_model(images)
         is_deep_supervision = len(yhats.shape) == 6
         if is_deep_supervision:
