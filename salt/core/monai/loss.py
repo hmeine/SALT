@@ -86,8 +86,11 @@ class HierarchyAwareDiceLoss(_Loss):
                 sub_input = input[:, class_idx]
                 sub_target = target[:, class_idx]
             else:
+                # computed_masks are cached in case other labels have the same parent
                 if parent_idx not in computed_masks:
                     if parent_idx - 1 in class_indices_np:
+                        # this dataset should give full information about the parent
+                        # (all children are in its label set)
                         computed_masks[parent_idx] = target[:, parent_idx - 1].bool()
                     else:
                         computed_masks[parent_idx] = self._bitwise_mask_equal(
