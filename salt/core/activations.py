@@ -19,8 +19,7 @@ class TreeSoftmax(nn.Module):
     The forward() method additionally propagates probabilities from parent to
     child nodes by default, multiplying the probabilities of the parents on
     their children (after the above softmax).  That option effectively causes
-    each output node to carry a conditional probability that can be used
-    directly.
+    each output node to carry a joint probability that can be used directly.
     '''
 
     def __init__(self, adjacency_matrix: np.ndarray, dim: int = 1) -> None:
